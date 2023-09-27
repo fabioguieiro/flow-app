@@ -52,6 +52,15 @@ export default function Home() {
     [setEdges],
   );
 
+  const handleCreateNewNode = () => {
+    const newNode = {
+      id: `${Math.random()}`,
+      position: { x: 50, y: 50 },
+      data: { label: "new node" },
+    };
+    setNodes((nodes) => [...nodes, newNode]);
+  };
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="flex  h-[32rem] w-[32rem] flex-col items-center justify-center bg-gray-700">
@@ -65,6 +74,9 @@ export default function Home() {
           <Controls />
           <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
         </ReactFlow>
+        <button className="bg-red-500 p-4" onClick={handleCreateNewNode}>
+          clique!
+        </button>
       </div>
     </main>
   );
