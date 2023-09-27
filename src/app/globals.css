@@ -43,3 +43,8 @@ button:active {
   box-shadow: 1px 1px 0px 0px black;
   translate: 1px 1px;
 }
+
+a,
+.react-flow__panel .react-flow__attribution .bottom .right {
+  display: none;
+}
