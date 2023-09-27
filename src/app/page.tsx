@@ -74,8 +74,11 @@ export default function Home() {
           <Controls />
           <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
         </ReactFlow>
-        <button className="bg-mechanicOrange p-4" onClick={handleCreateNewNode}>
-          clique!
+        <button
+          className="bg-mechanicOrange font-inter my-7 p-4"
+          onClick={handleCreateNewNode}
+        >
+          criar novo elemento
         </button>
       </div>
     </main>

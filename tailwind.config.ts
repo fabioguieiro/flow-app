@@ -14,6 +14,9 @@ const config: Config = {
       mrPink: "#F3C4C3",
       mechanicOrange: "#FF6101",
     },
+    fontFamily: {
+      inter: ["Inter", "sans-serif"],
+    },
     extend: {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
