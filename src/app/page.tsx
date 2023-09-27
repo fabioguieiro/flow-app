@@ -63,7 +63,7 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="flex  h-[32rem] w-[32rem] flex-col items-center justify-center bg-gray-700">
+      <div className="bg-wesBeige  flex h-[32rem] w-[32rem] flex-col items-center justify-center">
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -74,7 +74,7 @@ export default function Home() {
           <Controls />
           <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
         </ReactFlow>
-        <button className="bg-red-500 p-4" onClick={handleCreateNewNode}>
+        <button className="bg-mechanicOrange p-4" onClick={handleCreateNewNode}>
           clique!
         </button>
       </div>
