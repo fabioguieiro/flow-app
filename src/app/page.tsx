@@ -65,7 +65,7 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center justify-between">
       <div
-        className={`bg-wesBeige  flex `}
+        className="bg-wesBeige  flex"
         style={{ width: "100vw", height: "100vh" }}
       >
         <div className="flex  w-2/3 flex-col items-center justify-center">
