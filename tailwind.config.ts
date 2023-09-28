@@ -15,6 +15,7 @@ const config: Config = {
     },
     colors: {
       wesBeige: "#EAE2CC",
+      wesBeigeActive: "#EED388",
       manhatanBlue: "#6A769E",
       babyBlue: '#CAF0FC',
       shrekGreen: "#D7FCF1",
