@@ -10,7 +10,7 @@ type TCustomStartNodeProps = {
 export const CustomStartNode = ({data}: TCustomStartNodeProps) => {
   return (
     <>
-        <div className='bg-mrPink py-2 px-8 border-2 border-black rounded-lg tracking-widest text-black'>
+        <div className='bg-babyBlue py-2 px-8 border-2 border-black rounded-lg tracking-widest text-black'>
         <Handle
             type="source"
             position={Position.Bottom}

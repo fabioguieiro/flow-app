@@ -16,10 +16,14 @@ import "reactflow/dist/style.css";
 import {CustomDiamondNode} from "./components/atoms/CustomNodes/CustomDiamondNode";
 import { SideMenu } from "./components";
 import { CustomStartNode } from "./components/atoms/CustomNodes/CustomStartNode";
+import { CustomSuccessNode } from "./components/atoms/CustomNodes/CustomSuccessNode";
+import { CustomUnsuccessNode } from "./components/atoms/CustomNodes/CustomUnsuccessNode";
 
 const nodeTypes = {
   diamondNode: CustomDiamondNode,
   startNode: CustomStartNode,
+  successNode: CustomSuccessNode,
+  unsuccessNode: CustomUnsuccessNode,
 
 };
 const initialNodes = [
@@ -35,14 +39,18 @@ const initialNodes = [
   {
     id: "4",
     position: { x: 400, y: 200 },
+    className: 'bg-transparent',
+    type: 'unsuccessNode',
     data: { label: "decision = FALSE" },
   },
   {
     id: "5",
     position: { x: 400, y: 300 },
+    className: 'bg-transparent',
+    type: 'unsuccessNode',
     data: { label: "decision = FALSE" },
   },
-  { id: "6", position: { x: 100, y: 500 }, data: { label: "decision = TRUE" } },
+  { id: "6", type: 'successNode', className: 'bg-transparent',  position: { x: 100, y: 500 }, data: { label: "decision = TRUE" } },
 ];
 
 const initialEdges = [
@@ -55,7 +63,7 @@ const initialEdges = [
     label: "no",
   },
   { id: "e3-5", source: "3", target: "5", label: "no", sourceHandle: 'b' },
-  { id: "e3-6", source: "3", target: "6", label: "yes" },
+  { id: "e3-6", source: "3", target: "6", label: "yes", sourceHandle: 'c' },
 ];
 
 
