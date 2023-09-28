@@ -4,7 +4,7 @@ import { Handle, Position } from 'reactflow';
 
 export const CustomDiamondNode = () => {
   return (
-    <div style={{position: 'relative'}}>
+    <>
         <div style= {{ width: 100, height: 100, backgroundColor: '#6A769E', fontWeight: '900', letterSpacing: '2px', border: ' 2px solid #000000', transform: 'rotate(45deg)', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
         <Handle
             type="target"
@@ -32,7 +32,7 @@ export const CustomDiamondNode = () => {
         />
       <div style={{transform: 'rotate(-45deg)'}}>{`AGE > 18`}</div>
         </div>
-    </div>
+    </>
 
   );
 }

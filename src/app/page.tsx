@@ -15,18 +15,22 @@ import ReactFlow, {
 import "reactflow/dist/style.css";
 import {CustomDiamondNode} from "./components/atoms/CustomNodes/CustomDiamondNode";
 import { SideMenu } from "./components";
+import { CustomStartNode } from "./components/atoms/CustomNodes/CustomStartNode";
 
 const nodeTypes = {
-  selectorNode: CustomDiamondNode,
+  diamondNode: CustomDiamondNode,
+  startNode: CustomStartNode,
+
 };
 const initialNodes = [
   {
     id: "1",
+    type: 'startNode',
     position: { x: 100, y: 100 },
     data: { label: "START" },
-    style: { backgroundColor: '#F3C4C3', fontWeight: '900', letterSpacing: '2px', border: ' 2px solid #000000', borderRadius: 12}
+    className: 'bg-wesBeige',
   },
-  { id: "2", type: 'selectorNode', position: { x: 120, y: 200 }, data: { label: "Age > 18" }, className: 'bg-wesBeige', label: 'Age > 18'},
+  { id: "2", type: 'diamondNode', position: { x: 120, y: 200 }, data: { label: "Age > 18" }, className: 'bg-wesBeige', label: 'Age > 18'},
   { id: "3", position: { x: 100, y: 400 }, data: { label: "income > 1000" } },
   {
     id: "4",
@@ -42,7 +46,7 @@ const initialNodes = [
 ];
 
 const initialEdges = [
-  { id: "e1-2", source: "1", target: "2", },
+  { id: "e1-2", source: "1", target: "2", sourceHandle: 'a'  },
   { id: "e2-3", source: "2", target: "3", label: "yes", sourceHandle: 'c'  },
   {
     id: "e2-4",
