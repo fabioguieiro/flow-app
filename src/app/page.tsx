@@ -13,12 +13,21 @@ import ReactFlow, {
 } from "reactflow";
 
 import "reactflow/dist/style.css";
+import {CustomDiamondNode} from "./components/atoms/CustomNodes/CustomDiamondNode";
 import { SideMenu } from "./components";
 
+const nodeTypes = {
+  selectorNode: CustomDiamondNode,
+};
 const initialNodes = [
-  { id: "1", position: { x: 100, y: 100 }, data: { label: "START" } },
-  { id: "2", position: { x: 100, y: 200 }, data: { label: "Age > 18" } },
-  { id: "3", position: { x: 100, y: 300 }, data: { label: "income > 1000" } },
+  {
+    id: "1",
+    position: { x: 100, y: 100 },
+    data: { label: "START" },
+    style: { backgroundColor: '#F3C4C3', fontWeight: '900', letterSpacing: '2px', border: ' 2px solid #000000', borderRadius: 12}
+  },
+  { id: "2", type: 'selectorNode', position: { x: 120, y: 200 }, data: { label: "Age > 18" }, className: 'bg-wesBeige', label: 'Age > 18'},
+  { id: "3", position: { x: 100, y: 400 }, data: { label: "income > 1000" } },
   {
     id: "4",
     position: { x: 400, y: 200 },
@@ -29,21 +38,22 @@ const initialNodes = [
     position: { x: 400, y: 300 },
     data: { label: "decision = FALSE" },
   },
-  { id: "6", position: { x: 100, y: 400 }, data: { label: "decision = TRUE" } },
+  { id: "6", position: { x: 100, y: 500 }, data: { label: "decision = TRUE" } },
 ];
 
 const initialEdges = [
-  { id: "e1-2", source: "1", target: "2" },
-  { id: "e2-3", source: "2", target: "3", label: "yes" },
+  { id: "e1-2", source: "1", target: "2", },
+  { id: "e2-3", source: "2", target: "3", label: "yes", sourceHandle: 'c'  },
   {
     id: "e2-4",
     source: "2",
     target: "4",
     label: "no",
   },
-  { id: "e3-5", source: "3", target: "5", label: "no" },
+  { id: "e3-5", source: "3", target: "5", label: "no", sourceHandle: 'b' },
   { id: "e3-6", source: "3", target: "6", label: "yes" },
 ];
+
 
 export default function Home() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
@@ -75,12 +85,13 @@ export default function Home() {
             onNodesChange={onNodesChange}
             onEdgesChange={onEdgesChange}
             onConnect={onConnect}
+            nodeTypes={nodeTypes}
           >
             <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
           </ReactFlow>
         </div>
         <div className="flex w-1/3 flex-col items-center justify-center">
-          <SideMenu handleCreateNewNode={handleCreateNewNode}></SideMenu>
+          <SideMenu title="CRIE UM NOVO NÓ" handleCreateNewNode={handleCreateNewNode}></SideMenu>
         </div>
       </div>
     </main>
