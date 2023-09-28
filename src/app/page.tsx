@@ -5,11 +5,11 @@ import ReactFlow, {
   addEdge,
   Background,
   Connection,
-  Controls,
   Edge,
   useEdgesState,
   useNodesState,
   BackgroundVariant,
+  MarkerType,
 } from "reactflow";
 
 import "reactflow/dist/style.css";
@@ -18,6 +18,7 @@ import { SideMenu } from "./components";
 import { CustomStartNode } from "./components/atoms/CustomNodes/CustomStartNode";
 import { CustomSuccessNode } from "./components/atoms/CustomNodes/CustomSuccessNode";
 import { CustomUnsuccessNode } from "./components/atoms/CustomNodes/CustomUnsuccessNode";
+import { CustomConnectionLine } from "./components/atoms/CustomConnectionLine";
 
 const nodeTypes = {
   diamondNode: CustomDiamondNode,
@@ -26,6 +27,21 @@ const nodeTypes = {
   unsuccessNode: CustomUnsuccessNode,
 
 };
+
+const defaultEdgeOptions = {
+  style: { strokeWidth: 3, stroke: 'black' },
+  type: 'floating',
+  markerEnd: {
+    type: MarkerType.ArrowClosed,
+    color: 'black',
+  },
+};
+
+const connectionLineStyle = {
+  strokeWidth: 3,
+  stroke: 'black',
+};
+
 const initialNodes = [
   {
     id: "1",
@@ -54,7 +70,7 @@ const initialNodes = [
 ];
 
 const initialEdges = [
-  { id: "e1-2", source: "1", target: "2", sourceHandle: 'a'  },
+  { id: "e1-2", source: "1", target: "2", sourceHandle: 'a' },
   { id: "e2-3", source: "2", target: "3", label: "yes", sourceHandle: 'c'  },
   {
     id: "e2-4",
@@ -63,7 +79,7 @@ const initialEdges = [
     label: "no",
   },
   { id: "e3-5", source: "3", target: "5", label: "no", sourceHandle: 'b' },
-  { id: "e3-6", source: "3", target: "6", label: "yes", sourceHandle: 'c' },
+  { id: "e3-6", source: "3", target: "6", label: "yes", sourceHandle: 'c'},
 ];
 
 
@@ -98,6 +114,9 @@ export default function Home() {
             onEdgesChange={onEdgesChange}
             onConnect={onConnect}
             nodeTypes={nodeTypes}
+            defaultEdgeOptions={defaultEdgeOptions}
+            connectionLineStyle={connectionLineStyle}
+            connectionLineComponent={CustomConnectionLine}
           >
             <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
           </ReactFlow>
