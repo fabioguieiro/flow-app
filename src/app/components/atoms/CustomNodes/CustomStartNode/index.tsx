@@ -1,8 +1,13 @@
 import React from 'react';
 import { Handle, Position } from 'reactflow';
 
+type TCustomStartNodeProps = {
+  data: {
+    label: string;
+  };
+}
 
-export const CustomStartNode = () => {
+export const CustomStartNode = ({data}: TCustomStartNodeProps) => {
   return (
     <>
         <div className='bg-mrPink py-2 px-8 border-2 border-black rounded-lg tracking-widest text-black'>
@@ -13,7 +18,7 @@ export const CustomStartNode = () => {
             
             isConnectable={true}
         />
-      <div>START</div>
+        <div>{data.label}</div>
         </div>
     </>
 

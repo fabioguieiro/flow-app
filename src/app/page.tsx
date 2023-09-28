@@ -28,10 +28,10 @@ const initialNodes = [
     type: 'startNode',
     position: { x: 100, y: 100 },
     data: { label: "START" },
-    className: 'bg-wesBeige',
+    className: 'bg-transparent',
   },
-  { id: "2", type: 'diamondNode', position: { x: 120, y: 200 }, data: { label: "Age > 18" }, className: 'bg-wesBeige', label: 'Age > 18'},
-  { id: "3", position: { x: 100, y: 400 }, data: { label: "income > 1000" } },
+  { id: "2", type: 'diamondNode', position: { x: 120, y: 200 }, data: { label:'Age > 18' }, className: 'bg-transparent'},
+  { id: "3", type: 'diamondNode',className: 'bg-transparent',  position: { x: 100, y: 400 }, data: { label: "income > 1000" } },
   {
     id: "4",
     position: { x: 400, y: 200 },
