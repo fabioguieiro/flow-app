@@ -13,22 +13,23 @@ import ReactFlow, {
 } from "reactflow";
 
 import "reactflow/dist/style.css";
+import { SideMenu } from "./components";
 
 const initialNodes = [
-  { id: "1", position: { x: 0, y: 0 }, data: { label: "START" } },
-  { id: "2", position: { x: 0, y: 100 }, data: { label: "Age > 18" } },
-  { id: "3", position: { x: 0, y: 200 }, data: { label: "income > 1000" } },
+  { id: "1", position: { x: 100, y: 100 }, data: { label: "START" } },
+  { id: "2", position: { x: 100, y: 200 }, data: { label: "Age > 18" } },
+  { id: "3", position: { x: 100, y: 300 }, data: { label: "income > 1000" } },
   {
     id: "4",
-    position: { x: 300, y: 100 },
+    position: { x: 400, y: 200 },
     data: { label: "decision = FALSE" },
   },
   {
     id: "5",
-    position: { x: 300, y: 200 },
+    position: { x: 400, y: 300 },
     data: { label: "decision = FALSE" },
   },
-  { id: "6", position: { x: 0, y: 300 }, data: { label: "decision = TRUE" } },
+  { id: "6", position: { x: 100, y: 400 }, data: { label: "decision = TRUE" } },
 ];
 
 const initialEdges = [
@@ -64,24 +65,23 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center justify-between">
       <div
-        className={`bg-wesBeige  flex  flex-col items-center justify-center`}
+        className={`bg-wesBeige  flex `}
         style={{ width: "100vw", height: "100vh" }}
       >
-        <ReactFlow
-          nodes={nodes}
-          edges={edges}
-          onNodesChange={onNodesChange}
-          onEdgesChange={onEdgesChange}
-          onConnect={onConnect}
-        >
-          <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
-        </ReactFlow>
-        <button
-          className="bg-mechanicOrange font-inter my-7 p-4"
-          onClick={handleCreateNewNode}
-        >
-          criar novo elemento
-        </button>
+        <div className="flex  w-2/3 flex-col items-center justify-center">
+          <ReactFlow
+            nodes={nodes}
+            edges={edges}
+            onNodesChange={onNodesChange}
+            onEdgesChange={onEdgesChange}
+            onConnect={onConnect}
+          >
+            <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
+          </ReactFlow>
+        </div>
+        <div className="flex w-1/3 flex-col items-center justify-center">
+          <SideMenu handleCreateNewNode={handleCreateNewNode}></SideMenu>
+        </div>
       </div>
     </main>
   );

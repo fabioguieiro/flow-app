@@ -19,6 +19,7 @@ const config: Config = {
       shrekGreen: "#B5EBDB",
       mrPink: "#F3C4C3",
       mechanicOrange: "#FF6101",
+      black: "#000000",
     },
     fontFamily: {
       inter: ["Inter", "sans-serif"],
