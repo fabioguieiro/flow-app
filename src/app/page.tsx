@@ -50,23 +50,7 @@ const initialNodes = [
     data: { label: "START" },
     className: 'bg-transparent',
   },
-  { id: "2", type: 'diamondNode', position: { x: 120, y: 200 }, data: { label:'Age > 18' }, className: 'bg-transparent'},
-  { id: "3", type: 'diamondNode',className: 'bg-transparent',  position: { x: 100, y: 400 }, data: { label: "income > 1000" } },
-  {
-    id: "4",
-    position: { x: 400, y: 200 },
-    className: 'bg-transparent',
-    type: 'unsuccessNode',
-    data: { label: "decision = FALSE" },
-  },
-  {
-    id: "5",
-    position: { x: 400, y: 300 },
-    className: 'bg-transparent',
-    type: 'unsuccessNode',
-    data: { label: "decision = FALSE" },
-  },
-  { id: "6", type: 'successNode', className: 'bg-transparent',  position: { x: 100, y: 500 }, data: { label: "decision = TRUE" } },
+
 ];
 
 const initialEdges = [
@@ -90,13 +74,37 @@ export default function Home() {
     (params: Edge<any> | Connection) => setEdges((eds) => addEdge(params, eds)),
     [setEdges],
   );
+  const getNodeByType = (nodeType: 'diamondNode' | 'successNode' | 'unsuccessNode', label: string) => {
+    switch (nodeType) {
+      case 'diamondNode': 
+        return {
+             id: `${Math.random()}`,
+             type: 'diamondNode',
+             position: { x: 500, y: 500 },
+             data: { label: label},
+             className: 'bg-transparent'
+            }
+      case 'successNode': 
+        return {
+          id: `${Math.random()}`,
+          type: 'successNode',
+          position: { x: 500, y: 500 },
+          data: { label: label},
+        }
+      case 'unsuccessNode': 
+        return {
+          id: `${Math.random()}`,
+          type: 'unsuccessNode',
+          position: { x: 500, y: 500 },
+          data: { label: label},
+        }
+    }
 
-  const handleCreateNewNode = () => {
-    const newNode = {
-      id: `${Math.random()}`,
-      position: { x: 50, y: 50 },
-      data: { label: "new node" },
-    };
+  // { id: "2", type: 'diamondNode', position: { x: 120, y: 200 }, data: { label:'Age > 18' }, className: 'bg-transparent'},
+
+  }
+  const handleCreateNewNode = (nodeType: 'diamondNode' | 'successNode' | 'unsuccessNode', label: string) => {
+    const newNode = getNodeByType(nodeType,label)
     setNodes((nodes) => [...nodes, newNode]);
   };
 
