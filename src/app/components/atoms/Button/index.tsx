@@ -1,8 +1,9 @@
 import { ButtonProps } from "./types";
-export const Button = ({ label, handleClick }: ButtonProps) => {
+export const Button = ({ label, type, handleClick }: ButtonProps) => {
   return (
     <button
-      className="bg-mechanicOrange font-inter my-7 p-4"
+      type={type}
+      className="my-7 bg-mechanicOrange p-4 font-inter"
       onClick={handleClick}
     >
       {label}

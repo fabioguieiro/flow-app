@@ -17,13 +17,13 @@ const config: Config = {
       wesBeige: "#EAE2CC",
       wesBeigeActive: "#EED388",
       manhatanBlue: "#6A769E",
-      babyBlue: '#CAF0FC',
+      babyBlue: "#CAF0FC",
       shrekGreen: "#D7FCF1",
       mrPink: "#F3C4C3",
       mechanicOrange: "#FF6101",
       black: "#000000",
-      transparent: 'rgba(0, 0, 0, 0)'
-
+      transparent: "rgba(0, 0, 0, 0)",
+      red: "#FF0000",
     },
     fontFamily: {
       inter: ["Inter", "sans-serif"],

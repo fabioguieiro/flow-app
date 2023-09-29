@@ -1,94 +1,161 @@
 import { useCallback, useState } from "react";
 import { Button } from "../..";
 import { SideMenuProps } from "./types";
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import { validationSchema } from "../../../validations";
 
 export const SideMenu = ({ handleCreateNewNode, title }: SideMenuProps) => {
-  const [selectedNode ,setSelectedNode ] = useState<0 |1 | 2 | 3>(0)
+  const [selectedNode, setSelectedNode] = useState<0 | 1 | 2 | 3>(0);
 
-  const handleSelectNode = useCallback ((node: 0 |1 | 2 | 3)=> {
-    setSelectedNode(node)
-  }, [selectedNode])
+  const handleSelectNode = useCallback(
+    (node: 0 | 1 | 2 | 3) => {
+      setSelectedNode(node);
+    },
+    [selectedNode],
+  );
 
-  const handleClick = () => {
-    switch(selectedNode){
-      case 1: handleCreateNewNode('diamondNode', 'label teste')
+  const handleSwitchNode = (label?: string) => {
+    switch (selectedNode) {
+      case 1:
+        handleCreateNewNode("diamondNode", label || "");
         break;
-      case 2: handleCreateNewNode('unsuccessNode', 'label teste')
+      case 2:
+        handleCreateNewNode("unsuccessNode", "label teste");
         break;
-      case 3: handleCreateNewNode('successNode', 'label teste')
+      case 3:
+        handleCreateNewNode("successNode", "label teste");
         break;
     }
-  }
+  };
 
   return (
-    <aside className="bg-wesBeige h-full w-full border-l-4 border-black">
+    <aside className="h-full w-full border-l-4 border-black bg-wesBeige">
       <div className="flex h-full flex-col items-center justify-start">
-        <div className="bg-shrekGreen flex h-1/6 w-full items-center justify-center border-b-4  border-black">
+        <div className="flex h-1/6 w-full items-center justify-center border-b-4 border-black  bg-shrekGreen">
           <h1 className="text-2xl font-bold text-black">{title}</h1>
         </div>
-        <div  className={`w-full h-2/6 flex items-center justify-between border-b-4 border-black `}>
-          <div onClick={()=>handleSelectNode(1)} className={`w-1/2 h-full flex justify-center items-center ${selectedNode === 1 ? 'bg-wesBeigeActive': 'bg-wesBeige'}`}>
-            <div style={{ width: 100, height: 100, backgroundColor: '#6A769E', fontWeight: '900', letterSpacing: '2px', border: ' 2px solid #000000', transform: 'rotate(45deg)', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-              <div style={{transform: 'rotate(-45deg)'}}>Decisão</div>
+        <div
+          className={`flex h-2/6 w-full items-center justify-between border-b-4 border-black `}
+        >
+          <div
+            onClick={() => handleSelectNode(1)}
+            className={`flex h-full w-1/2 items-center justify-center ${
+              selectedNode === 1 ? "bg-wesBeigeActive" : "bg-wesBeige"
+            }`}
+          >
+            <div
+              style={{
+                width: 100,
+                height: 100,
+                backgroundColor: "#6A769E",
+                fontWeight: "900",
+                letterSpacing: "2px",
+                border: " 2px solid #000000",
+                transform: "rotate(45deg)",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <div style={{ transform: "rotate(-45deg)" }}>Decisão</div>
             </div>
           </div>
-          <div className="flex flex-col h-full items-center w-1/2 justify-around border-l-4 border-black">
-            <div onClick={()=>handleSelectNode(2)} className={`flex items-center justify-center border-b-4 border-black h-1/2 w-full ${selectedNode === 2 ? 'bg-wesBeigeActive': 'bg-wesBeige'}`}>
-              <div className='bg-mrPink py-2 px-8 border-2 border-black rounded-lg tracking-widest text-black'>decision = false</div>
+          <div className="flex h-full w-1/2 flex-col items-center justify-around border-l-4 border-black">
+            <div
+              onClick={() => handleSelectNode(2)}
+              className={`flex h-1/2 w-full items-center justify-center border-b-4 border-black ${
+                selectedNode === 2 ? "bg-wesBeigeActive" : "bg-wesBeige"
+              }`}
+            >
+              <div className="rounded-lg border-2 border-black bg-mrPink px-8 py-2 tracking-widest text-black">
+                decision = false
+              </div>
             </div>
-            <div onClick={()=>handleSelectNode(3)} className={`flex items-center justify-center h-1/2 w-full ${selectedNode === 3 ? 'bg-wesBeigeActive': 'bg-wesBeige'}`}>
-              <div className='bg-shrekGreen py-2 px-8 border-2 border-black rounded-lg tracking-widest text-black'>decision = true</div>
+            <div
+              onClick={() => handleSelectNode(3)}
+              className={`flex h-1/2 w-full items-center justify-center ${
+                selectedNode === 3 ? "bg-wesBeigeActive" : "bg-wesBeige"
+              }`}
+            >
+              <div className="rounded-lg border-2 border-black bg-shrekGreen px-8 py-2 tracking-widest text-black">
+                decision = true
+              </div>
             </div>
           </div>
         </div>
-        <div className="w-full h-2/6 flex items-center justify-center border-b-4 border-black">
-          {selectedNode === 1 ?
-
-        <form className="w-8/12 h-full">
-          <div className=" flex h-full flex-col justify-around items-center">
-            <div className="relative h-10 w-full min-w-[200px]">
-              <input
-                className="peer h-full w-full border-l-4 border-r-4 border-b-4 border-black border-t-transparent bg-white items-end px-3 py-2.5 text-sm  text-black  transition-all placeholder-shown:border placeholder-shown:border-black placeholder-shown:border-t-black focus:border-2 focus:border-black focus:border-t-transparent"
-                placeholder=" "
+        <div className="flex h-2/6 w-full items-center justify-center border-b-4 border-black">
+          {selectedNode === 1 ? (
+            <Formik
+              initialValues={{
+                nomeVariavel: "",
+                criterioComparacao: "",
+                valorComparacao: "",
+              }}
+              validationSchema={validationSchema}
+              onSubmit={(values) => {
+                handleSwitchNode(
+                  `${values.nomeVariavel} ${values.criterioComparacao} ${values.valorComparacao}`,
+                );
+                console.log(values);
+              }}
+            >
+              <Form className="h-full w-8/12">
+                <div className=" flex h-full flex-col items-center justify-around">
+                  <div className="relative h-10 w-full min-w-[200px]">
+                    <Field
+                      type="text"
+                      name="nomeVariavel"
+                      className="bg-white peer h-full w-full items-end border-b-4 border-l-4 border-r-4 border-black border-t-transparent px-3 py-2.5 text-sm text-black transition-all placeholder-shown:border placeholder-shown:border-black placeholder-shown:border-t-black focus:border-2 focus:border-black focus:border-t-transparent"
+                      placeholder="Nome da Variavel"
+                    />
+                    <ErrorMessage
+                      name="nomeVariavel"
+                      component="div"
+                      className="text-red text-end text-[12px] font-medium"
+                    />
+                  </div>
+                  <div className="relative h-10 w-full min-w-[200px]">
+                    <Field
+                      type="text"
+                      name="criterioComparacao"
+                      className="bg-white peer h-full w-full items-end border-b-4 border-l-4 border-r-4 border-black border-t-transparent px-3 py-2.5 text-sm text-black transition-all placeholder-shown:border placeholder-shown:border-black placeholder-shown:border-t-black focus:border-2 focus:border-black focus:border-t-transparent"
+                      placeholder="Critério de Comparação"
+                    />
+                    <ErrorMessage
+                      name="criterioComparacao"
+                      component="div"
+                      className="text-red text-end text-[12px] font-medium"
+                    />
+                  </div>{" "}
+                  <div className="relative h-10 w-full min-w-[200px]">
+                    <Field
+                      type="text"
+                      name="valorComparacao"
+                      className="bg-white peer h-full w-full items-end border-b-4 border-l-4 border-r-4 border-black border-t-transparent px-3 py-2.5 text-sm text-black transition-all placeholder-shown:border placeholder-shown:border-black placeholder-shown:border-t-black focus:border-2 focus:border-black focus:border-t-transparent"
+                      placeholder="Valor de Comparação"
+                    />
+                    <ErrorMessage
+                      name="valorComparacao"
+                      component="div"
+                      className="text-red text-end text-[12px] font-medium"
+                    />
+                  </div>
+                </div>
+                <Button
+                  type={"submit"}
+                  label="criar novo elemento"
+                  handleClick={() => {}}
                 />
-              <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-black transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md  before:border-black before:transition-all after:pointer-events-none  after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md  after:border-black after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-black peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-pink-500   ">
-              nome da variável
-              </label>
-            </div>
-            <div className="relative h-10 w-full min-w-[200px]">
-              <select
-                className="peer h-full w-full border-l-4 border-r-4 border-b-4 border-black border-t-transparent bg-white items-end px-3 py-2.5 text-sm  text-black  transition-all placeholder-shown:border placeholder-shown:border-black placeholder-shown:border-t-black focus:border-2 focus:border-black focus:border-t-transparent"
-                placeholder=" "
-                >
-                <option>=</option>
-                <option>{`>`}</option>
-                <option>{`<`}</option>
-                <option>{`>=`}</option>
-                <option>{`<=`}</option>
-              </select>
-              <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-black transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md  before:border-black before:transition-all after:pointer-events-none  after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md  after:border-black after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-black peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-pink-500   ">
-              critério de comparação
-              </label>
-            </div>
-            <div className="relative h-10 w-full min-w-[200px]">
-              <input
-                className="peer h-full w-full border-l-4 border-r-4 border-b-4 border-black border-t-transparent bg-white items-end px-3 py-2.5 text-sm  text-black  transition-all placeholder-shown:border placeholder-shown:border-black placeholder-shown:border-t-black focus:border-2 focus:border-black focus:border-t-transparent"
-                placeholder=" "
-                />
-              <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-black transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md  before:border-black before:transition-all after:pointer-events-none  after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md  after:border-black after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-black peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-pink-500   ">
-              valor de coparação
-              </label>
-            </div>
-          </div>
-
-        </form>
-
-      : null}
+              </Form>
+            </Formik>
+          ) : (
+            <Button
+              type={"submit"}
+              label="criar novo elemento"
+              handleClick={handleSwitchNode}
+            />
+          )}
         </div>
-      <Button
-        label="criar novo elemento"
-        handleClick={handleClick}
-        />
       </div>
     </aside>
   );

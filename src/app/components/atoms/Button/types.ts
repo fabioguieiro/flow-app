@@ -1,4 +1,5 @@
 export interface ButtonProps {
-  handleClick: () => void;
+  handleClick?: () => void;
   label: string;
+  type: "button" | "submit" | "reset";
 }
