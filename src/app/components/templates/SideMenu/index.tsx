@@ -83,7 +83,7 @@ export const SideMenu = ({ handleCreateNewNode, title }: SideMenuProps) => {
             </div>
           </div>
         </div>
-        <div className="flex h-2/6 w-full items-center justify-center border-b-4 border-black">
+        <div className="flex h-3/6 w-full items-center justify-center border-b-4 border-black">
           {selectedNode === 1 ? (
             <Formik
               initialValues={{
@@ -99,47 +99,59 @@ export const SideMenu = ({ handleCreateNewNode, title }: SideMenuProps) => {
                 console.log(values);
               }}
             >
-              <Form className="h-full w-8/12">
-                <div className=" flex h-full flex-col items-center justify-around">
-                  <div className="relative h-10 w-full min-w-[200px]">
-                    <Field
-                      type="text"
-                      name="nomeVariavel"
-                      className="bg-white peer h-full w-full items-end border-b-4 border-l-4 border-r-4 border-black border-t-transparent px-3 py-2.5 text-sm text-black transition-all placeholder-shown:border placeholder-shown:border-black placeholder-shown:border-t-black focus:border-2 focus:border-black focus:border-t-transparent"
-                      placeholder="Nome da Variavel"
-                    />
-                    <ErrorMessage
-                      name="nomeVariavel"
-                      component="div"
-                      className="text-red text-end text-[12px] font-medium"
-                    />
-                  </div>
-                  <div className="relative h-10 w-full min-w-[200px]">
-                    <Field
-                      type="text"
-                      name="criterioComparacao"
-                      className="bg-white peer h-full w-full items-end border-b-4 border-l-4 border-r-4 border-black border-t-transparent px-3 py-2.5 text-sm text-black transition-all placeholder-shown:border placeholder-shown:border-black placeholder-shown:border-t-black focus:border-2 focus:border-black focus:border-t-transparent"
-                      placeholder="Critério de Comparação"
-                    />
-                    <ErrorMessage
-                      name="criterioComparacao"
-                      component="div"
-                      className="text-red text-end text-[12px] font-medium"
-                    />
-                  </div>{" "}
-                  <div className="relative h-10 w-full min-w-[200px]">
-                    <Field
-                      type="text"
-                      name="valorComparacao"
-                      className="bg-white peer h-full w-full items-end border-b-4 border-l-4 border-r-4 border-black border-t-transparent px-3 py-2.5 text-sm text-black transition-all placeholder-shown:border placeholder-shown:border-black placeholder-shown:border-t-black focus:border-2 focus:border-black focus:border-t-transparent"
-                      placeholder="Valor de Comparação"
-                    />
-                    <ErrorMessage
-                      name="valorComparacao"
-                      component="div"
-                      className="text-red text-end text-[12px] font-medium"
-                    />
-                  </div>
+              <Form className="flex h-full w-8/12 flex-col items-center justify-between">
+                <div className="relative h-10 w-full min-w-[200px]">
+                  <label className="mt-0 text-[12px] text-black">
+                    Nome da Variável
+                  </label>
+                  <Field
+                    type="text"
+                    name="nomeVariavel"
+                    className="bg-white peer h-full w-full items-end border-b-4 border-l-4 border-r-4 border-black border-t-transparent px-3 py-2.5 text-sm text-black transition-all placeholder-shown:border placeholder-shown:border-black placeholder-shown:border-t-black focus:border-2 focus:border-black focus:border-t-transparent"
+                  />
+                  <ErrorMessage
+                    name="nomeVariavel"
+                    component="div"
+                    className="text-red text-end text-[12px] font-medium"
+                  />
+                </div>
+                <div className="relative h-10 w-full min-w-[200px]">
+                  <label className="mt-0 text-[12px] text-black">
+                    Critério de comparação
+                  </label>
+                  <Field
+                    as="select"
+                    name="criterioComparacao"
+                    className="bg-white peer h-full w-full items-end border-b-4 border-l-4 border-r-4 border-black border-t-transparent px-3 py-2.5 text-sm  text-black transition-all placeholder-shown:border placeholder-shown:border-black placeholder-shown:border-t-black focus:border-2 focus:border-black focus:border-t-transparent"
+                  >
+                    <option value=""></option>
+                    <option value=">">{`>`}</option>
+                    <option value="<">{`<`}</option>
+                    <option value="=">{`=`}</option>
+                    <option value="<=">{`<=`}</option>
+                    <option value=">=">{`>=`}</option>
+                  </Field>
+
+                  <ErrorMessage
+                    name="criterioComparacao"
+                    component="div"
+                    className="text-red text-end text-[12px] font-medium"
+                  />
+                </div>{" "}
+                <div className="relative h-10 w-full min-w-[200px]">
+                  <label className="mt-0 text-[12px] text-black">
+                    Valor de Comparação
+                  </label>
+                  <Field
+                    type="text"
+                    name="valorComparacao"
+                    className="bg-white peer h-full w-full items-end border-b-4 border-l-4 border-r-4 border-black border-t-transparent px-3 py-2.5 text-sm text-black transition-all placeholder-shown:border placeholder-shown:border-black placeholder-shown:border-t-black focus:border-2 focus:border-black focus:border-t-transparent"
+                  />
+                  <ErrorMessage
+                    name="valorComparacao"
+                    component="div"
+                    className="text-red text-end text-[12px] font-medium"
+                  />
                 </div>
                 <Button
                   type={"submit"}
