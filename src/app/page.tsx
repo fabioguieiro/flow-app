@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import ReactFlow, {
   addEdge,
   Background,
@@ -29,7 +29,6 @@ const nodeTypes = {
 
 const defaultEdgeOptions = {
   style: { strokeWidth: 3, stroke: "black" },
-  type: "floating",
   markerEnd: {
     type: MarkerType.ArrowClosed,
     color: "black",
@@ -51,27 +50,29 @@ const initialNodes = [
   },
 ];
 
-const initialEdges = [
-  { id: "e1-2", source: "1", target: "2", sourceHandle: "a" },
-  { id: "e2-3", source: "2", target: "3", label: "yes", sourceHandle: "c" },
-  {
-    id: "e2-4",
-    source: "2",
-    target: "4",
-    label: "no",
-  },
-  { id: "e3-5", source: "3", target: "5", label: "no", sourceHandle: "b" },
-  { id: "e3-6", source: "3", target: "6", label: "yes", sourceHandle: "c" },
-];
+type TEdgeProps = {
+  id: string;
+  source: string;
+  target: string;
+  sourceHandle: string;
+};
+
+const initialEdges: Array<TEdgeProps> = [];
 
 export default function Home() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-  console.log("nodes: ", nodes);
+  const [edgeModal, setEdgeModal] = useState(false);
+  const [newEdgeLabel, setNewEdgeLabel] = useState("");
+
   const onConnect = useCallback(
-    (params: Edge<any> | Connection) => setEdges((eds) => addEdge(params, eds)),
-    [setEdges],
+    (params: Edge<any> | Connection) => {
+      setEdges((eds) => addEdge(params, eds));
+      setEdgeModal(true);
+    },
+    [[setEdges]],
   );
+
   const getNodeByType = (
     nodeType: "diamondNode" | "successNode" | "unsuccessNode",
     label: string,
@@ -100,8 +101,6 @@ export default function Home() {
           data: { label: label },
         };
     }
-
-    // { id: "2", type: 'diamondNode', position: { x: 120, y: 200 }, data: { label:'Age > 18' }, className: 'bg-transparent'},
   };
   const handleCreateNewNode = (
     nodeType: "diamondNode" | "successNode" | "unsuccessNode",
@@ -109,6 +108,17 @@ export default function Home() {
   ) => {
     const newNode = getNodeByType(nodeType, label);
     setNodes((nodes) => [...nodes, newNode]);
+  };
+
+  const changeEdgeLabel = () => {
+    const lastEdge = edges[edges.length - 1];
+    lastEdge.label = newEdgeLabel;
+
+    const newEdges = edges.slice(0, edges.length - 1);
+    newEdges.push(lastEdge);
+
+    setEdges(newEdges);
+    setEdgeModal(false);
   };
 
   return (
@@ -139,6 +149,40 @@ export default function Home() {
           ></SideMenu>
         </div>
       </div>
+      {edgeModal && (
+        <div className="fixed left-0 top-0 flex h-full w-full items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg p-8">
+            <h1 className="text-center text-2xl font-bold">
+              deseja nomear esta aresta?
+            </h1>
+            <div className="flex flex-col">
+              <label>nome da aresta</label>
+              <input
+                type="text"
+                placeholder="ex: sim"
+                className="px-4 text-right text-black"
+                onChange={(e) => {
+                  setNewEdgeLabel(e.target.value);
+                }}
+              ></input>
+            </div>
+            <div className="mt-8 flex justify-center gap-4">
+              <button
+                className="rounded-lg bg-mrPink px-4 py-2 text-black"
+                onClick={() => setEdgeModal(false)}
+              >
+                Não
+              </button>
+              <button
+                className="mr-4 rounded-lg bg-shrekGreen px-4 py-2 text-black"
+                onClick={changeEdgeLabel}
+              >
+                Sim
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
