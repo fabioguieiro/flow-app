@@ -10,6 +10,7 @@ import ReactFlow, {
   useNodesState,
   BackgroundVariant,
   MarkerType,
+  XYPosition,
 } from "reactflow";
 
 import "reactflow/dist/style.css";
@@ -19,6 +20,8 @@ import { CustomStartNode } from "./components/atoms/CustomNodes/CustomStartNode"
 import { CustomSuccessNode } from "./components/atoms/CustomNodes/CustomSuccessNode";
 import { CustomUnsuccessNode } from "./components/atoms/CustomNodes/CustomUnsuccessNode";
 import { CustomConnectionLine } from "./components/atoms/CustomConnectionLine";
+import { SuccessModal } from "./components/molecules/modals/SuccessModal";
+import { FailModal } from "./components/molecules/modals/FailModal";
 
 const nodeTypes = {
   diamondNode: CustomDiamondNode,
@@ -40,7 +43,7 @@ const connectionLineStyle = {
   stroke: "black",
 };
 
-const initialNodes = [
+const initialNodes: Array<TNodeProps> = [
   {
     id: "1",
     type: "startNode",
@@ -49,6 +52,14 @@ const initialNodes = [
     className: "bg-transparent",
   },
 ];
+
+type TNodeProps = {
+  id: string;
+  type?: string;
+  position: XYPosition;
+  data: { label: string };
+  className?: string;
+};
 
 type TEdgeProps = {
   id: string;
@@ -62,6 +73,9 @@ const initialEdges: Array<TEdgeProps> = [];
 export default function Home() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [successModalVisible, setSuccessModalVisible] = useState(false);
+  const [failModalVisible, setFailModalVisible] = useState(false);
+
   const [edgeModal, setEdgeModal] = useState(false);
   const [newEdgeLabel, setNewEdgeLabel] = useState("");
 
@@ -72,6 +86,11 @@ export default function Home() {
     },
     [[setEdges]],
   );
+
+  const handleCleanFlux = () => {
+    setNodes(initialNodes);
+    setEdges(initialEdges);
+  };
 
   const getNodeByType = (
     nodeType: "diamondNode" | "successNode" | "unsuccessNode",
@@ -121,13 +140,90 @@ export default function Home() {
     setEdgeModal(false);
   };
 
+  const handleSubmitFlux = () => {
+    const flux = {
+      nodes: nodes,
+      edges: edges,
+    };
+    console.log(flux);
+    const response = validateFlux(flux);
+    console.log("response", response);
+    response ? setSuccessModalVisible(true) : setFailModalVisible(true);
+  };
+
+  const validateFlux = (flux: any) => {
+    const nodes = flux.nodes;
+    const edges = flux.edges;
+
+    const startNodes = nodes.filter(
+      (node: TNodeProps) => node.type === "startNode",
+    );
+    const diamondNodes = nodes.filter(
+      (node: TNodeProps) => node.type === "diamondNode",
+    );
+    const successNodes = nodes.filter(
+      (node: TNodeProps) => node.type === "successNode",
+    );
+    const unsuccessNodes = nodes.filter(
+      (node: TNodeProps) => node.type === "unsuccessNode",
+    );
+
+    if (startNodes.length !== 1) {
+      return false;
+    }
+
+    // Check that all diamondNodes are source to 2 edges and target to 1 edge
+    for (const diamondNode of diamondNodes) {
+      const incomingEdges = edges.filter(
+        (edge: TEdgeProps) => edge.target === diamondNode.id,
+      );
+      const outgoingEdges = edges.filter(
+        (edge: TEdgeProps) => edge.source === diamondNode.id,
+      );
+
+      if (incomingEdges.length !== 1 || outgoingEdges.length !== 2) {
+        return false;
+      }
+    }
+
+    // Check that all successNode and unsuccessNode are source to 0 edges and target to 1 edge
+    for (const successNode of successNodes) {
+      const incomingEdges = edges.filter(
+        (edge: TEdgeProps) => edge.target === successNode.id,
+      );
+      const outgoingEdges = edges.filter(
+        (edge: TEdgeProps) => edge.source === successNode.id,
+      );
+
+      if (incomingEdges.length !== 1 || outgoingEdges.length !== 0) {
+        return false;
+      }
+    }
+
+    for (const unsuccessNode of unsuccessNodes) {
+      const incomingEdges = edges.filter(
+        (edge: TEdgeProps) => edge.target === unsuccessNode.id,
+      );
+      const outgoingEdges = edges.filter(
+        (edge: TEdgeProps) => edge.source === unsuccessNode.id,
+      );
+
+      if (incomingEdges.length !== 1 || outgoingEdges.length !== 0) {
+        return false;
+      }
+    }
+
+    // All conditions are met
+    return true;
+  };
+
   return (
     <main className="flex flex-col items-center justify-between">
       <div
         className="flex  bg-wesBeige"
         style={{ width: "100vw", height: "100vh" }}
       >
-        <div className="flex  w-2/3 flex-col items-center justify-center">
+        <div className="relative flex w-2/3 flex-col items-center justify-center">
           <ReactFlow
             nodes={nodes}
             edges={edges}
@@ -141,6 +237,12 @@ export default function Home() {
           >
             <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
           </ReactFlow>
+          <button
+            onClick={handleSubmitFlux}
+            className="bg-matrixGreen absolute bottom-4 right-4 p-4"
+          >
+            Enviar Fluxo
+          </button>
         </div>
         <div className="flex w-1/3 flex-col items-center justify-center">
           <SideMenu
@@ -149,6 +251,7 @@ export default function Home() {
           ></SideMenu>
         </div>
       </div>
+
       {edgeModal && (
         <div className="fixed left-0 top-0 flex h-full w-full items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white rounded-lg p-8">
@@ -183,6 +286,19 @@ export default function Home() {
           </div>
         </div>
       )}
+      <SuccessModal
+        visible={successModalVisible}
+        closeModal={() => {
+          setSuccessModalVisible(false);
+          handleCleanFlux();
+        }}
+      ></SuccessModal>
+      <FailModal
+        visible={failModalVisible}
+        closeModal={() => {
+          setFailModalVisible(false);
+        }}
+      ></FailModal>
     </main>
   );
 }

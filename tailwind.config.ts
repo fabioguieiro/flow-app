@@ -14,6 +14,8 @@ const config: Config = {
       xl: "1440px",
     },
     colors: {
+      matrixGreen: "#42b750",
+      walterWhite: "#FFFFFF",
       wesBeige: "#EAE2CC",
       wesBeigeActive: "#EED388",
       manhatanBlue: "#6A769E",
