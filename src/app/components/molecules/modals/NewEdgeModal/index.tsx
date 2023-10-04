@@ -1,10 +1,5 @@
 import { useState } from 'react'
-
-type TNewEdgeModalProps = {
-    visible: boolean
-    changeEdgeLabel: (label: string) => void
-    closeModal: () => void
-}
+import { TNewEdgeModalProps } from './types'
 
 export const NewEdgeModal = ({
     visible,
