@@ -23,9 +23,6 @@ export const CustomDiamondNode = ({ data }: TCustomDiamondNodeProps) => {
                     type="target"
                     position={Position.Top}
                     style={{ background: '#555', left: -2, top: -5 }}
-                    onConnect={(params) =>
-                        console.log('handle onConnect', params)
-                    }
                     isConnectable={true}
                     id="a"
                 />

@@ -6,7 +6,6 @@ type TSuccessModalProps = {
 }
 
 export const SuccessModal = ({ visible, closeModal }: TSuccessModalProps) => {
-    console.log('visible', visible)
     return (
         <div
             onClick={() => closeModal}

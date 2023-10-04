@@ -8,9 +8,6 @@ export const CustomSuccessNode = () => {
                 <Handle
                     type="target"
                     position={Position.Top}
-                    onConnect={(params) =>
-                        console.log('handle onConnect', params)
-                    }
                     isConnectable={true}
                     id="a"
                 />

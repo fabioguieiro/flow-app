@@ -104,7 +104,6 @@ export const SideMenu = ({ handleCreateNewNode, title }: SideMenuProps) => {
                                 handleSwitchNode(
                                     `${values.nomeVariavel} ${values.criterioComparacao} ${values.valorComparacao}`
                                 )
-                                console.log(values)
                             }}
                         >
                             <Form className="flex h-full w-8/12 flex-col items-center justify-between">

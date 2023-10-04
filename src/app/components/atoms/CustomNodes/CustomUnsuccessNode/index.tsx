@@ -8,9 +8,6 @@ export const CustomUnsuccessNode = () => {
                 <Handle
                     type="target"
                     position={Position.Left}
-                    onConnect={(params) =>
-                        console.log('handle onConnect', params)
-                    }
                     isConnectable={true}
                     id="a"
                 />
