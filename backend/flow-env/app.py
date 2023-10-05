@@ -1,13 +1,11 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS  # Import CORS from flask_cors
+from flask_cors import CORS 
 from pymongo import MongoClient
 
 app = Flask(__name__)
 
-# Enable CORS for all routes
 CORS(app, origins=["*"])
 
-# MongoDB connection setup
 client = MongoClient('mongodb+srv://fabioguieiro:boIoxn66dutU2FLN@flow-cluster.ojd4jjc.mongodb.net/?retryWrites=true&w=majority')
 db = client["Flow-Cluster-Database"]
 collection = db["Flow-Cluster-Collection"]
