@@ -1,5 +1,5 @@
 'use client'
-
+import React from 'react'
 import { useCallback, useState } from 'react'
 import ReactFlow, {
     addEdge,
@@ -11,7 +11,8 @@ import ReactFlow, {
     BackgroundVariant,
 } from 'reactflow'
 
-import 'reactflow/dist/style.css'
+// import 'reactflow/dist/style.css'
+
 import {
     SideMenu,
     CustomConnectionLine,

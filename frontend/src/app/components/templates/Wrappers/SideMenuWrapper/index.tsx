@@ -1,4 +1,5 @@
 import { PropsWithChildren } from 'react'
+import React from 'react'
 
 export const SideMenuWrapper = ({ children }: PropsWithChildren) => {
     return (

@@ -1,5 +1,5 @@
 import { ButtonProps } from './types'
-
+import React from 'react'
 export const ActionButton = ({ label, type, handleClick }: ButtonProps) => {
     return (
         <button

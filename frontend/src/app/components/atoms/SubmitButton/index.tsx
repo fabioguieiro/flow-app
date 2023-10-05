@@ -1,4 +1,5 @@
 import { TSubmitButtonProps } from './types'
+import React from 'react'
 
 export const SubmitButton = ({ onClick }: TSubmitButtonProps) => {
     return (

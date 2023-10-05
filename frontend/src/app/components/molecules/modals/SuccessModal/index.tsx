@@ -1,4 +1,5 @@
-import { SuccessIcon } from '@/app/assets/icons/SuccessIcon'
+import { SuccessIcon } from '../../../../assets/icons/SuccessIcon'
+import React from 'react'
 
 type TSuccessModalProps = {
     visible: boolean

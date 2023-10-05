@@ -1,4 +1,5 @@
-import { FailIcon } from '@/app/assets/icons/FailIcon'
+import { FailIcon } from '../../../../assets/icons/FailIcon'
+import React from 'react'
 
 type TFailModalProps = {
     visible: boolean

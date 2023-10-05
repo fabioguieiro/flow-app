@@ -1,3 +1,5 @@
+import React from 'react'
+
 type TFailIconProps = {
     width?: number
     height?: number

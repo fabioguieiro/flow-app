@@ -3,6 +3,7 @@ import { ActionButton } from '../../'
 import { SideMenuProps } from './types'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import { validationSchema } from '../../../validations'
+import React from 'react'
 
 export const SideMenu = ({ handleCreateNewNode, title }: SideMenuProps) => {
     const [selectedNode, setSelectedNode] = useState<0 | 1 | 2 | 3>(0)
