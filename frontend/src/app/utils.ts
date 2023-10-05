@@ -5,7 +5,7 @@ import {
     CustomUnsuccessNode,
 } from './components'
 
-import { MarkerType } from 'reactflow'
+import MarkerType from 'reactflow'
 import { TEdgeProps, TNodeProps } from './types'
 
 export const getNodeByType = (
