@@ -119,6 +119,20 @@ Follow these steps to run the project locally:
 - If your flux is complete you'll see a nice success modal, and your flux will be stored on the database
 - If your flux is not complete a modal will sugest you to check your flow chart and complete it!
 
+## Project Desicions
+
+### Design
+A minimalistic design was not chosen by chance, I wanted to give the user the perception that the system is very easy to use by using simple shapes and nice solid colors.
+
+### React
+The react framework was chosen, firstly because of my background using it, and also for the power to react to changes on DOM immediately.
+
+### React Flow
+The reactflow lib was chosen because it has many functionalities that i needed already implemented, like drag and drop, edge connections, edge/node data structure and so on.
+
+### Python
+The python language was chosen because of my background using it, and because it has a very simple syntax making it easy for a front end focused developer to build a server in a short deadline
+
 ## Main technologies
 
 #### front end
