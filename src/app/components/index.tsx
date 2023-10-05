@@ -16,3 +16,5 @@ export { NewEdgeModal } from './molecules/modals/NewEdgeModal'
 
 //templates
 export { SideMenu } from './templates/SideMenu'
+export { SideMenuWrapper } from './templates/Wrappers/SideMenuWrapper'
+export { FlowAreaWrapper } from './templates/Wrappers/FlowAreaWrapper'

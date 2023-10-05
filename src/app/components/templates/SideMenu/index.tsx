@@ -7,23 +7,20 @@ import { validationSchema } from '../../../validations'
 export const SideMenu = ({ handleCreateNewNode, title }: SideMenuProps) => {
     const [selectedNode, setSelectedNode] = useState<0 | 1 | 2 | 3>(0)
 
-    const handleSelectNode = useCallback(
-        (node: 0 | 1 | 2 | 3) => {
-            setSelectedNode(node)
-        },
-        [selectedNode]
-    )
+    const handleSelectNode = (node: 0 | 1 | 2 | 3) => {
+        setSelectedNode(node)
+    }
 
-    const handleSwitchNode = (label?: string) => {
+    const handleSwitchNode = (label: string) => {
         switch (selectedNode) {
             case 1:
-                handleCreateNewNode('diamondNode', label || '')
+                handleCreateNewNode('diamondNode', label)
                 break
             case 2:
-                handleCreateNewNode('unsuccessNode', 'label teste')
+                handleCreateNewNode('unsuccessNode', label)
                 break
             case 3:
-                handleCreateNewNode('successNode', 'label teste')
+                handleCreateNewNode('successNode', label)
                 break
         }
     }
@@ -171,7 +168,7 @@ export const SideMenu = ({ handleCreateNewNode, title }: SideMenuProps) => {
                         <ActionButton
                             type={'submit'}
                             label="criar novo elemento"
-                            handleClick={handleSwitchNode}
+                            handleClick={() => handleSwitchNode('')}
                         />
                     )}
                 </div>

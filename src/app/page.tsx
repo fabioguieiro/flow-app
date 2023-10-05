@@ -18,10 +18,11 @@ import {
     SuccessModal,
     FailModal,
     NewEdgeModal,
+    SubmitButton,
+    SideMenuWrapper,
+    FlowAreaWrapper,
 } from './components'
-import { SubmitButton } from './components/atoms/SubmitButton'
-import { FlowAreaWrapper } from './components/templates/SideMenu/Wrappers/FlowAreaWrapper'
-import { SideMenuWrapper } from './components/templates/SideMenu/Wrappers/SideMenuWrapper'
+import { handlePostRequest } from './services/ApiRequest'
 
 import {
     connectionLineStyle,
@@ -79,7 +80,12 @@ export default function Home() {
         }
 
         const response = validateFlux(flux)
-        response ? setSuccessModalVisible(true) : setFailModalVisible(true)
+        if (response) {
+            handlePostRequest(flux)
+            setSuccessModalVisible(true)
+        } else {
+            setFailModalVisible(true)
+        }
     }
 
     return (
