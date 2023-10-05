@@ -40,11 +40,13 @@ Follow these steps to run the project locally:
     python3 -m pip install pymongo flask flask-cors
    ```
     
-  On Windows
-   
-    python -m pip install pymongo flask flask-cors
+   On Windows
 
-4. **Run the server:**
+   ```bash
+    python -m pip install pymongo flask flask-cors
+   ```
+
+5. **Run the server:**
    
    On Mac/Linux
    
@@ -52,9 +54,10 @@ Follow these steps to run the project locally:
     python3 app.py
    ```
     
-  On Windows
-   
-    ```python app.py```
+   On Windows
+   ```bash
+    python app.py
+   ```
 
 
 # front end
