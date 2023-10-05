@@ -9,9 +9,8 @@ export const handlePostRequest = async (flux: any) => {
                 edges: flux.edges,
             }
         )
-
-        console.log('response: ', response.data)
+        return response
     } catch (error) {
-        console.error('Error making POST request:', error)
+        throw error
     }
 }

@@ -31,13 +31,15 @@ import {
     initialEdges,
     initialNodes,
     nodeTypes,
-    validateFlux,
 } from './utils'
 
 export default function Home() {
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
+
     const [successModalVisible, setSuccessModalVisible] = useState(false)
+    const [successMessage, setSuccessMessage] = useState('')
+    const [failMessage, setFailMessage] = useState('')
     const [failModalVisible, setFailModalVisible] = useState(false)
     const [newEdgeModalVisible, setNewEdgeModalVisible] = useState(false)
 
@@ -73,18 +75,28 @@ export default function Home() {
         setNewEdgeModalVisible(false)
     }
 
-    const handleSubmitFlux = () => {
+    const handleSubmitFlux = async () => {
         const flux = {
             nodes: nodes,
             edges: edges,
         }
 
-        const response = validateFlux(flux)
-        if (response) {
-            handlePostRequest(flux)
+        try {
+            const response = await handlePostRequest(flux)
+            setSuccessMessage(response.data.message)
             setSuccessModalVisible(true)
-        } else {
-            setFailModalVisible(true)
+        } catch (error: any) {
+            if (error.response.status === 400) {
+                setFailMessage(error.response.data.error)
+                setFailModalVisible(true)
+            } else {
+                setFailMessage(
+                    'Seems like something went wrong. Please try again.'
+                )
+                setFailModalVisible(true)
+            }
+
+            console.error(error)
         }
     }
 
@@ -131,12 +143,14 @@ export default function Home() {
             />
             <SuccessModal
                 visible={successModalVisible}
+                message={successMessage}
                 closeModal={() => {
                     setSuccessModalVisible(false)
                     handleCleanFlux()
                 }}
             ></SuccessModal>
             <FailModal
+                message={failMessage}
                 visible={failModalVisible}
                 closeModal={() => {
                     setFailModalVisible(false)

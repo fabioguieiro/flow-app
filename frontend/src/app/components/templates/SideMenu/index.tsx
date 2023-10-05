@@ -12,7 +12,6 @@ export const SideMenu = ({ handleCreateNewNode, title }: SideMenuProps) => {
     }
 
     const handleSwitchNode = (label: string) => {
-        console.log('handleSwitchNode')
         switch (selectedNode) {
             case 1:
                 handleCreateNewNode('diamondNode', label)
@@ -99,7 +98,6 @@ export const SideMenu = ({ handleCreateNewNode, title }: SideMenuProps) => {
                             }}
                             validationSchema={validationSchema}
                             onSubmit={(values) => {
-                                console.log('teste')
                                 handleSwitchNode(
                                     `${values.variableName} ${values.comparisionSymbol} ${values.value}`
                                 )
