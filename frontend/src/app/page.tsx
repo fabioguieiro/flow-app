@@ -118,7 +118,7 @@ export default function Home() {
                 </FlowAreaWrapper>
                 <SideMenuWrapper>
                     <SideMenu
-                        title="CRIE UM NOVO NÓ"
+                        title="CREATE A NEW NODE"
                         handleCreateNewNode={handleCreateNewNode}
                     ></SideMenu>
                 </SideMenuWrapper>

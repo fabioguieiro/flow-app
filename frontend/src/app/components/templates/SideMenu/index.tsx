@@ -12,6 +12,7 @@ export const SideMenu = ({ handleCreateNewNode, title }: SideMenuProps) => {
     }
 
     const handleSwitchNode = (label: string) => {
+        console.log('handleSwitchNode')
         switch (selectedNode) {
             case 1:
                 handleCreateNewNode('diamondNode', label)
@@ -57,7 +58,7 @@ export const SideMenu = ({ handleCreateNewNode, title }: SideMenuProps) => {
                             }}
                         >
                             <div style={{ transform: 'rotate(-45deg)' }}>
-                                Decisão
+                                Decision
                             </div>
                         </div>
                     </div>
@@ -92,40 +93,41 @@ export const SideMenu = ({ handleCreateNewNode, title }: SideMenuProps) => {
                     {selectedNode === 1 ? (
                         <Formik
                             initialValues={{
-                                nomeVariavel: '',
-                                criterioComparacao: '',
-                                valorComparacao: '',
+                                variableName: '',
+                                comparisionSymbol: '',
+                                value: '',
                             }}
                             validationSchema={validationSchema}
                             onSubmit={(values) => {
+                                console.log('teste')
                                 handleSwitchNode(
-                                    `${values.nomeVariavel} ${values.criterioComparacao} ${values.valorComparacao}`
+                                    `${values.variableName} ${values.comparisionSymbol} ${values.value}`
                                 )
                             }}
                         >
                             <Form className="flex h-full w-8/12 flex-col items-center justify-between">
                                 <div className="relative h-10 w-full min-w-[200px]">
                                     <label className="mt-0 text-[12px] text-black">
-                                        Nome da Variável
+                                        variable name
                                     </label>
                                     <Field
                                         type="text"
-                                        name="nomeVariavel"
+                                        name="variableName"
                                         className="bg-white peer h-full w-full items-end border-b-4 border-l-4 border-r-4 border-black border-t-transparent px-3 py-2.5 text-sm text-black transition-all placeholder-shown:border placeholder-shown:border-black placeholder-shown:border-t-black focus:border-2 focus:border-black focus:border-t-transparent"
                                     />
                                     <ErrorMessage
-                                        name="nomeVariavel"
+                                        name="variableName"
                                         component="div"
                                         className="text-end text-[12px] font-medium text-red"
                                     />
                                 </div>
                                 <div className="relative h-10 w-full min-w-[200px]">
                                     <label className="mt-0 text-[12px] text-black">
-                                        Critério de comparação
+                                        Comparision Symbol
                                     </label>
                                     <Field
                                         as="select"
-                                        name="criterioComparacao"
+                                        name="comparisionSymbol"
                                         className="bg-white peer h-full w-full items-end border-b-4 border-l-4 border-r-4 border-black border-t-transparent px-3 py-2.5 text-sm  text-black transition-all placeholder-shown:border placeholder-shown:border-black placeholder-shown:border-t-black focus:border-2 focus:border-black focus:border-t-transparent"
                                     >
                                         <option value=""></option>
@@ -137,29 +139,29 @@ export const SideMenu = ({ handleCreateNewNode, title }: SideMenuProps) => {
                                     </Field>
 
                                     <ErrorMessage
-                                        name="criterioComparacao"
+                                        name="comparisionSymbol"
                                         component="div"
                                         className="text-end text-[12px] font-medium text-red"
                                     />
                                 </div>{' '}
                                 <div className="relative h-10 w-full min-w-[200px]">
                                     <label className="mt-0 text-[12px] text-black">
-                                        Valor de Comparação
+                                        Value
                                     </label>
                                     <Field
                                         type="text"
-                                        name="valorComparacao"
+                                        name="value"
                                         className="bg-white peer h-full w-full items-end border-b-4 border-l-4 border-r-4 border-black border-t-transparent px-3 py-2.5 text-sm text-black transition-all placeholder-shown:border placeholder-shown:border-black placeholder-shown:border-t-black focus:border-2 focus:border-black focus:border-t-transparent"
                                     />
                                     <ErrorMessage
-                                        name="valorComparacao"
+                                        name="value"
                                         component="div"
                                         className="text-end text-[12px] font-medium text-red"
                                     />
                                 </div>
                                 <ActionButton
                                     type={'submit'}
-                                    label="criar novo elemento"
+                                    label="create new element"
                                     handleClick={() => {}}
                                 />
                             </Form>
@@ -167,7 +169,7 @@ export const SideMenu = ({ handleCreateNewNode, title }: SideMenuProps) => {
                     ) : (
                         <ActionButton
                             type={'submit'}
-                            label="criar novo elemento"
+                            label="create new element"
                             handleClick={() => handleSwitchNode('')}
                         />
                     )}

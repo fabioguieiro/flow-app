@@ -1,9 +1,7 @@
 import * as Yup from 'yup'
 
 export const validationSchema = Yup.object().shape({
-    nomeVariavel: Yup.string().required('Nome da variável é obrigatório'),
-    criterioComparacao: Yup.string().required(
-        'Critério de comparação é obrigatório'
-    ),
-    valorComparacao: Yup.string().required('Valor de comparação é obrigatório'),
+    variableName: Yup.string().required('Variable name is mandatory'),
+    comparisionSymbol: Yup.string().required('Comparision symbol is mandatory'),
+    value: Yup.string().required('Value is mandatory'),
 })

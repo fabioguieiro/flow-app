@@ -16,13 +16,13 @@ export const NewEdgeModal = ({
         >
             <div className="bg-white rounded-lg p-8">
                 <h1 className="my-4 text-center text-2xl font-bold">
-                    deseja nomear esta aresta?
+                    Do you want to give this edge a label?
                 </h1>
                 <div className="flex flex-col">
-                    <label className="text-start">nome da aresta</label>
+                    <label className="text-start">Edge label</label>
                     <input
                         type="text"
-                        className="px-4 text-right text-black"
+                        className="h-8 rounded-md px-4 text-right text-black"
                         onChange={(e) => {
                             setNewEdgeLabel(e.target.value)
                         }}
@@ -30,16 +30,16 @@ export const NewEdgeModal = ({
                 </div>
                 <div className="mt-8 flex justify-center gap-4">
                     <button
-                        className="rounded-lg bg-mrPink px-4 py-2 text-black"
+                        className="w-32 rounded-lg bg-mrPink px-4 py-2 text-black"
                         onClick={closeModal}
                     >
-                        Não
+                        No
                     </button>
                     <button
-                        className="mr-4 rounded-lg bg-shrekGreen px-4 py-2 text-black"
+                        className="mr-4  w-32 rounded-lg bg-shrekGreen px-4 py-2 text-black"
                         onClick={() => changeEdgeLabel(newEdgeLabel)}
                     >
-                        Sim
+                        yes
                     </button>
                 </div>
             </div>
