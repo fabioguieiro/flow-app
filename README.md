@@ -126,6 +126,7 @@ Follow these steps to run the project locally:
 - next 13.5
 - typescript 5.2
 - tailwind css 3.3
+- reactflow 11.9
 - axios 1.5
 - yup 1.3
 - back end
